@@ -18,6 +18,13 @@ const RegisterForm = () => {
   const [captcha, setCaptcha] = useState(null);
   const [emptyFieldMessage, setEmptyFieldMessage] = useState(false);
 
+  const resetFields = () => {
+    setName("");
+    setSurnames("");
+    setBirth("");
+    setEmail("");
+  };
+
   const handleSubmit = () => {
     if (isEmpty(name) || isEmpty(surnames) || isEmpty(birth) || isEmpty(email)) {
       setEmptyFieldMessage(true);
@@ -43,6 +50,8 @@ const RegisterForm = () => {
             isClosable: true,
           });
         });
+
+      resetFields();
     }
   };
   return (
@@ -52,19 +61,25 @@ const RegisterForm = () => {
       </Text>
       <FormControl isRequired my={5}>
         <FormLabel htmlFor="name">Nombre</FormLabel>
-        <Input id="name" placeholder="Nombre" onChange={(e) => setName(e.target.value)} />
+        <Input id="name" placeholder="Nombre" onChange={(e) => setName(e.target.value)} value={name} />
       </FormControl>
       <FormControl isRequired my={5}>
         <FormLabel htmlFor="surnames">Apellidos</FormLabel>
-        <Input id="surnames" placeholder="Apellidos" onChange={(e) => setSurnames(e.target.value)} />
+        <Input id="surnames" placeholder="Apellidos" onChange={(e) => setSurnames(e.target.value)} value={surnames} />
       </FormControl>
       <FormControl isRequired my={5}>
         <FormLabel htmlFor="surnames">Correo electronico</FormLabel>
-        <Input id="surnames" placeholder="Apellidos" onChange={(e) => setEmail(e.target.value)} />
+        <Input id="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} value={email} />
       </FormControl>
       <FormControl isRequired my={5}>
         <FormLabel htmlFor="surnames">Fecha de nacimiento</FormLabel>
-        <Input type="date" id="birth" placeholder="Fecha de nacimiento" onChange={(e) => setBirth(e.target.value)} />
+        <Input
+          type="date"
+          id="birth"
+          placeholder="Fecha de nacimiento"
+          onChange={(e) => setBirth(e.target.value)}
+          value={birth}
+        />
       </FormControl>
       <CaptchaComponent setCaptcha={setCaptcha} />
       <Button mt={4} bgColor={"#0b5fff"} color={"white"} type="submit" width={"100%"} onClick={handleSubmit} disabled={!captcha}>
